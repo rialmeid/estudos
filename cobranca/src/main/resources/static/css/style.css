@@ -1,0 +1,23 @@
+.navbar-brand {
+    padding-top: 12px;
+}
+
+.panel-default {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.form-group {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.form-check {
+    margin-left: 10px;
+}
+
+.btn-primary {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
