@@ -19,4 +19,12 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }
 }
