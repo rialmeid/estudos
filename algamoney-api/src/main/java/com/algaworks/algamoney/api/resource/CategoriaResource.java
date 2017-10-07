@@ -3,12 +3,12 @@ package com.algaworks.algamoney.api.resource;
 import com.algaworks.algamoney.api.model.Categoria;
 import com.algaworks.algamoney.api.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class CategoriaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> criar(@RequestBody Categoria categoria, HttpServletResponse response) {
+    public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
         Categoria categoriaSalva = categoriaRepository.save(categoria);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(categoriaSalva.getCodigo()).toUri();
@@ -35,7 +35,14 @@ public class CategoriaResource {
     }
 
     @GetMapping("/{codigo}")
-    public Categoria buscarPorCodigo(@PathVariable Long codigo) {
-        return categoriaRepository.findOne(codigo);
+    public ResponseEntity<Categoria> buscarPorCodigo(@PathVariable Long codigo) {
+        ResponseEntity<Categoria> responseEntity;
+        Categoria categoria = categoriaRepository.findOne(codigo);
+        if (categoria == null) {
+            responseEntity = ResponseEntity.notFound().build();
+        } else {
+            responseEntity = ResponseEntity.ok().body(categoria);
+        }
+        return responseEntity;
     }
 }
