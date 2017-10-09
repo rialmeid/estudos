@@ -2,6 +2,7 @@ package com.algaworks.algamoney.api.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "pessoa")
@@ -50,5 +51,20 @@ public class Pessoa {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Pessoa pessoa = (Pessoa) o;
+
+        return codigo.equals(pessoa.codigo);
+    }
+
+    @Override
+    public int hashCode() {
+        return codigo.hashCode();
     }
 }

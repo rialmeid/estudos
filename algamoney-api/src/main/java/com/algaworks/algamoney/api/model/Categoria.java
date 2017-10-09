@@ -3,6 +3,7 @@ package com.algaworks.algamoney.api.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "categoria")
@@ -30,5 +31,20 @@ public class Categoria {
 
     public void setCodigo(Long codigo) {
         this.codigo = codigo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Categoria categoria = (Categoria) o;
+
+        return codigo.equals(categoria.codigo);
+    }
+
+    @Override
+    public int hashCode() {
+        return codigo.hashCode();
     }
 }
