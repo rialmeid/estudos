@@ -40,11 +40,11 @@ public class Categoria {
 
         Categoria categoria = (Categoria) o;
 
-        return codigo.equals(categoria.codigo);
+        return codigo != null ? codigo.equals(categoria.codigo) : categoria.codigo == null;
     }
 
     @Override
     public int hashCode() {
-        return codigo.hashCode();
+        return codigo != null ? codigo.hashCode() : 0;
     }
 }
