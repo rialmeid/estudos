@@ -1,5 +1,8 @@
 package com.algaworks.algamoney.api.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -18,6 +21,7 @@ public class Lancamento {
 
     @NotNull
     @Column(name = "dt_vencimento")
+    @JsonDeserialize(using=LocalDateDeserializer.class)
     private LocalDate dtVencimento;
 
     @Column(name = "dt_pagto")

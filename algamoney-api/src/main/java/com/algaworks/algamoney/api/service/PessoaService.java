@@ -19,7 +19,7 @@ public class PessoaService {
         return repository.save(pessoaSalva);
     }
 
-    private Pessoa getPessoaPorCodigo(Long codigo) {
+    public Pessoa getPessoaPorCodigo(Long codigo) {
         Pessoa pessoaSalva = repository.findOne(codigo);
 
         if (pessoaSalva == null) {
