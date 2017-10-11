@@ -3,8 +3,11 @@ package com.algaworks.algamoney.api.resource;
 import com.algaworks.algamoney.api.event.RecursoCriadoEvent;
 import com.algaworks.algamoney.api.model.Categoria;
 import com.algaworks.algamoney.api.repository.CategoriaRepository;
+import com.algaworks.algamoney.api.repository.filter.CategoriaFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
 import java.net.URI;
 import java.util.List;
 
@@ -26,8 +30,8 @@ public class CategoriaResource {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<Categoria> listar() {
-        return categoriaRepository.findAll();
+    public Page<Categoria> listar(CategoriaFilter filter, Pageable pageable) {
+        return categoriaRepository.filtrar(filter, pageable);
     }
 
     @PostMapping

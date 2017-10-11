@@ -1,5 +1,6 @@
 package com.algaworks.algamoney.api.resource;
 
+import com.algaworks.algamoney.api.model.Categoria;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertThat;
 
 public class CategoriaResourceTest {
 
-    public static final String URL_CATEGORIAS = "http://localhost:8080/categorias";
+    public static final String URL_CATEGORIAS = "http://localhost:8080/categorias/";
     private TestRestTemplate template = new TestRestTemplate();
 
     private HttpHeaders headers;
@@ -25,18 +26,49 @@ public class CategoriaResourceTest {
     }
 
     @Test
-    public void getCategorias_comCodigo_retornarJSON() throws Exception {
-        String json = template.getForObject("http://localhost:8080/categorias/1", String.class);
-        assertThat(json, containsString("{\"codigo\":1,\"nome\":\"Lazer\"}"));
-        System.out.println(json);
+    public void getCategorias_comCodigo_retornarCategoria() throws Exception {
+        Categoria json = template.getForObject(URL_CATEGORIAS.concat("1"), Categoria.class);
+        assertThat(json.getCodigo(), Matchers.notNullValue());
+        System.out.println(json.getNome());
     }
 
     @Test
     public void getCategorias_semCodigo_retornarJSONCompleto() throws Exception {
         String json = template.getForObject(URL_CATEGORIAS, String.class);
+
+        //JsonElement jsonElement = parser.parse(json);
+
         assertThat(json, containsString("[{\"codigo\":1,\"nome\":\"Lazer\"},{\"codigo\":2,\"nome\":\"Alimentação\"}"));
         System.out.println(json);
     }
+
+    @Test
+    public void getCategorias_comFiltroPorNome_retornarFiltrado() throws Exception {
+        String json = template.getForObject(URL_CATEGORIAS.concat("?nome=super"), String.class);
+        assertThat(json, equalTo("[{\"codigo\":3,\"nome\":\"Supermercado\"}]"));
+    }
+
+    @Test
+    public void getCategorias_comFiltroPorPagina_retornarFiltrado() throws Exception {
+        String json = template.getForObject(URL_CATEGORIAS.concat("?size=2&page=2&nome=a"), String.class);
+        assertThat(json, equalTo("{" +
+                "\"content" +
+                "\":" +
+                "[" +
+                "{\"codigo\":6,\"nome\":\"bancos\"}," +
+                "{\"codigo\":8,\"nome\":\"casa\"}" +
+                "]," +
+                "\"last\":false," +
+                "\"totalElements\":14," +
+                "\"totalPages\":7," +
+                "\"size\":2," +
+                "\"number\":2," +
+                "\"sort\":null," +
+                "\"first\":false," +
+                "\"numberOfElements\":2" +
+                "}"));
+    }
+
 
     @Test
     public void getCategorias_comEntity_comCodigo_retornarOk() throws Exception {
@@ -45,7 +77,7 @@ public class CategoriaResourceTest {
     }
 
     @Test
-    public void postLancamento_comRequestCorreto_retornarXXX() throws Exception {
+    public void postLancamento_comRequestCorreto_retornarCreated() throws Exception {
         String jsonIn = "{\"nome\":\"casa\"}";
         ResponseEntity<String> responseEntity = getStringResponseEntity(jsonIn);
         HttpStatus statusCode = responseEntity.getStatusCode();

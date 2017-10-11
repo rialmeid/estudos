@@ -7,11 +7,14 @@ import org.junit.Test;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.assertThat;
 
 public class LancamentoResourceTest {
 
-    public static final String URL_LANCAMENTOS = "http://localhost:8080/lancamentos";
+    public static final String URL_LANCAMENTOS = "http://localhost:8080/lancamentos/";
     private TestRestTemplate template = new TestRestTemplate();
     private HttpHeaders headers;
 
@@ -70,6 +73,19 @@ public class LancamentoResourceTest {
         assertThat(body, Matchers.containsString("mensagemUsuario"));
         assertThat(body, Matchers.containsString("mensagemDesenvolvedor"));
         System.out.println(body);
+    }
+
+    @Test
+    public void deleteLancamento_comCodigo_removerRegistro() throws Exception {
+        List<Map<String, Object>> list = template.getForObject(URL_LANCAMENTOS, List.class);
+        Map<String, Object> map = list.get(0);
+        Object codigo = map.get("codigo");
+        String str = String.valueOf(codigo);
+
+        template.delete(URL_LANCAMENTOS.concat(str));
+
+        String json = template.getForObject(URL_LANCAMENTOS.concat(str), String.class);
+        assertThat(json, Matchers.nullValue());
     }
 
     private ResponseEntity<String> getStringResponseEntity(String json) throws JsonProcessingException {

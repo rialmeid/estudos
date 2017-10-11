@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,6 +58,12 @@ public class LancamentoResource {
         Long codigo = save.getCodigo();
         publisher.publishEvent(new RecursoCriadoEvent(this, response, codigo));
         return ResponseEntity.status(HttpStatus.CREATED).body(save);
+    }
+
+    @DeleteMapping("/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable Long codigo) {
+        repository.delete(codigo);
     }
 
     @ExceptionHandler({PessoaInexistenteOuInativaException.class})
