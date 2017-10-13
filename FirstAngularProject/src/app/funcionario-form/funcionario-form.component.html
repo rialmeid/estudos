@@ -1,21 +1,22 @@
 <div class="alert alert-success" role="alert">
-  Meu nome é {{nome}}
+  Meu nome é {{nome}} e sobrenome é {{sobrenome}}
 </div>
 
 <div class="alert alert-success" role="alert" *ngIf="adicionado">
   Meu apelido é {{apelido}}
 </div>
 
-<div class="alert alert-success" role="alert">
-  Sobrenome é {{sobrenome}}
-</div>
-
-
 <div class="form-group">
-  <label for="exampleInputEmail1">Nome</label>
-  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+  <label for="inNome">Nome</label>
+  <input type="text" class="form-control" id="inNome"
          placeholder="Informe o nome" (input)="alterarNome($event)" value="{{nome}}">
 </div>
+
+<div class="form-group">
+  <label>Sobrenome</label>
+  <input type="text" class="form-control" [(ngModel)]="sobrenome">
+</div>
+
 <button type="button" class="btn btn-primary" (click)="adicionar()" [disabled]="nome.length == 0">Adicionar</button>
 
 <div class="form-group">
@@ -24,7 +25,3 @@
 </div>
 <button type="button" class="btn btn-primary" (click)="adicionarApelido(apelidoInput.value)">Apelido</button>
 
-<div class="form-group">
-  <label>Sobrenome</label>
-  <input type="text" class="form-control" [(ngModel)]="sobrenome">
-</div>

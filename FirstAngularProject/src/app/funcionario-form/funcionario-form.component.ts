@@ -26,7 +26,6 @@ export class FuncionarioFormComponent  {
     };
 
     this.funcionarioAdicionado.emit(funcionario);
-
   }
 
   alterarNome(event: any) {
