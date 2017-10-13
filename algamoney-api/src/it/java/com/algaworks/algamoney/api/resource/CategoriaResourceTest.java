@@ -69,7 +69,6 @@ public class CategoriaResourceTest {
                 "}"));
     }
 
-
     @Test
     public void getCategorias_comEntity_comCodigo_retornarOk() throws Exception {
         HttpStatus statusCode = template.getForEntity("http://localhost:8080/categorias/1", String.class).getStatusCode();
