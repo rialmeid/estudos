@@ -4,10 +4,12 @@ import {NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {ButtonModule, DataTableModule, TabViewModule, TooltipModule} from "primeng/primeng";
 import {InputTextModule} from "primeng/components/inputtext/inputtext";
+import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LancamentosPesquisaComponent
   ],
   imports: [
     BrowserModule,
