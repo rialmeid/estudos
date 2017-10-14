@@ -4,12 +4,16 @@ import {NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {ButtonModule, DataTableModule, TabViewModule, TooltipModule} from "primeng/primeng";
 import {InputTextModule} from "primeng/components/inputtext/inputtext";
-import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
+import {LancamentosPesquisaComponent} from "./lancamentos-pesquisa/lancamentos-pesquisa.component";
+import {NavbarComponent} from "./navbar/navbar.component";
+import {PessoasPesquisaComponent} from "./pessoas-pesquisa/pessoas-pesquisa.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LancamentosPesquisaComponent
+    LancamentosPesquisaComponent,
+    NavbarComponent,
+    PessoasPesquisaComponent
   ],
   imports: [
     BrowserModule,
