@@ -2,7 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 
 import {AppComponent} from "./app.component";
-import {ButtonModule, DataTableModule, TabViewModule} from "primeng/primeng";
+import {ButtonModule, DataTableModule, TabViewModule, TooltipModule} from "primeng/primeng";
 import {InputTextModule} from "primeng/components/inputtext/inputtext";
 
 @NgModule({
@@ -14,7 +14,8 @@ import {InputTextModule} from "primeng/components/inputtext/inputtext";
     TabViewModule,
     ButtonModule,
     InputTextModule,
-    DataTableModule
+    DataTableModule,
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
