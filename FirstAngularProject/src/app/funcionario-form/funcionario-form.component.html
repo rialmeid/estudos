@@ -16,7 +16,7 @@
 
 <div class="form-group">
   <label>Sobrenome</label>
-  <input type="text" class="form-control" [(ngModel)]="sobrenome" appCampoColorido [cor]="'orange'">
+  <input type="text" class="form-control" [(ngModel)]="sobrenome" appCampoColorido [cor]="'orange'" #campo="campoColorido">
 </div>
 
 <button type="button" class="btn btn-primary" (click)="adicionar()" [disabled]="nome.length == 0">Adicionar</button>
@@ -26,4 +26,9 @@
   <input type="text" class="form-control" #apelidoInput (focus)="adicionado = false">
 </div>
 <button type="button" class="btn btn-primary" (click)="adicionarApelido(apelidoInput.value)">Apelido</button>
+
+
+
+<button class="btn btn-info" (click)="campo.colorir()">Colorir</button>
+<button class="btn btn-info" (click)="campo.descolorir()">Descolorir</button>
 

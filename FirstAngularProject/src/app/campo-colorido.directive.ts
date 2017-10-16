@@ -1,7 +1,8 @@
 import {Directive, ElementRef, HostBinding, HostListener, Input, Renderer2} from '@angular/core';
 
 @Directive({
-  selector: '[appCampoColorido]'
+  selector: '[appCampoColorido]',
+  exportAs: 'campoColorido'
 })
 export class CampoColoridoDirective {
 
@@ -14,18 +15,19 @@ export class CampoColoridoDirective {
   }
 
   @HostListener('focus')
-  aoGanharFoco() {
+  colorir() {
     this.extracted(this.cor);
+  }
+
+
+  @HostListener('blur')
+  descolorir() {
+    this.extracted('green');
   }
 
   private extracted(value) {
     // this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', value);
     this.corDeFundo = value;
-  }
-
-  @HostListener('blur')
-  aoPerderFoco() {
-    this.extracted('green');
   }
 
 }
