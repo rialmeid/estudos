@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostBinding, HostListener, Renderer2} from '@angular/core';
+import {Directive, ElementRef, HostBinding, HostListener, Input, Renderer2} from '@angular/core';
 
 @Directive({
   selector: '[appCampoColorido]'
@@ -7,13 +7,15 @@ export class CampoColoridoDirective {
 
   @HostBinding('style.backgroundColor') corDeFundo: string;
 
+  @Input() cor = 'gray';
+
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2) {
   }
 
   @HostListener('focus')
   aoGanharFoco() {
-    this.extracted('yellow');
+    this.extracted(this.cor);
   }
 
   private extracted(value) {
