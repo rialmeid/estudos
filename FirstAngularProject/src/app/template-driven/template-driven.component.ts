@@ -26,6 +26,8 @@ export class TemplateDrivenComponent {
     console.log(form);
     console.log(this.cliente);
 
+    form.reset({profissao: ''});
+
   }
 
 
