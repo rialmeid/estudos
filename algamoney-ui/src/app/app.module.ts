@@ -3,7 +3,8 @@ import {NgModule} from "@angular/core";
 
 import {AppComponent} from "./app.component";
 import {
-  ButtonModule, CalendarModule, DataTableModule, DropdownModule, InputTextareaModule, SelectButtonModule, TabViewModule,
+  ButtonModule, CalendarModule, DataTableModule, DropdownModule, InputMaskModule, InputTextareaModule,
+  SelectButtonModule, TabViewModule,
   TooltipModule
 } from "primeng/primeng";
 import {InputTextModule} from "primeng/components/inputtext/inputtext";
@@ -14,6 +15,10 @@ import {LancamentoCadastroComponent} from './lancamento-cadastro/lancamento-cada
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import {FormsModule} from "@angular/forms";
+import { MessageComponent } from './message/message.component';
+import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
+import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,10 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     NavbarComponent,
     PessoasPesquisaComponent,
     LancamentoCadastroComponent,
-    PessoaCadastroComponent
+    PessoaCadastroComponent,
+    MessageComponent,
+    LancamentosGridComponent,
+    PessoasGridComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +44,9 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    InputMaskModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
