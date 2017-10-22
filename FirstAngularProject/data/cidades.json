@@ -1,0 +1,12 @@
+{
+  "cidades": [
+    {
+      "nome": "MOGI DAS CRUZES",
+      "id": 2
+    },
+    {
+      "nome": "São Paulo",
+      "id": 3
+    }
+  ]
+}

@@ -11,6 +11,10 @@ import {CampoColoridoDirective} from './campo-colorido.directive';
 import {TemplateDrivenComponent} from './template-driven/template-driven.component';
 import {BotoesModule} from "./botoes/botoes.module";
 import {NavegacaoModule} from "./navegacao/navegacao.module";
+import {FuncionarioService} from "./funcionario-service";
+import {CidadeService} from "./cidade.service";
+import {HttpModule} from "@angular/http";
+import { CidadesComponent } from './cidades/cidades.component';
 
 
 @NgModule({
@@ -21,14 +25,18 @@ import {NavegacaoModule} from "./navegacao/navegacao.module";
     FuncionarioCardComponent,
     FuncionarioFormComponent,
     CampoColoridoDirective,
-    TemplateDrivenComponent
+    TemplateDrivenComponent,
+    CidadesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    NavegacaoModule
+    NavegacaoModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    FuncionarioService,
+    CidadeService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
