@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
 public class LancamentoResourceTest {
 
     public static final String URL_LANCAMENTOS = "http://localhost:8080/lancamentos/";
-    private TestRestTemplate template = new TestRestTemplate();
+    private TestRestTemplate template = new TestRestTemplate("admin@algamoney.com", "admin", TestRestTemplate.HttpClientOption.ENABLE_COOKIES);
     private HttpHeaders headers;
 
     @Before

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
 public class CategoriaResourceTest {
 
     public static final String URL_CATEGORIAS = "http://localhost:8080/categorias/";
-    private TestRestTemplate template = new TestRestTemplate();
+    private TestRestTemplate template = new TestRestTemplate("admin@algamoney.com", "admin", TestRestTemplate.HttpClientOption.ENABLE_COOKIES);
 
     private HttpHeaders headers;
 
@@ -45,28 +45,33 @@ public class CategoriaResourceTest {
     @Test
     public void getCategorias_comFiltroPorNome_retornarFiltrado() throws Exception {
         String json = template.getForObject(URL_CATEGORIAS.concat("?nome=super"), String.class);
-        assertThat(json, equalTo("[{\"codigo\":3,\"nome\":\"Supermercado\"}]"));
+        assertThat(json, equalTo("{\"content\":[{\"codigo\":3,\"nome\":\"Supermercado\"}],\"totalPages\":1,\"totalElements\":1,\"last\":true,\"size\":20,\"number\":0,\"sort\":null,\"numberOfElements\":1,\"first\":true}"));
+
     }
 
     @Test
     public void getCategorias_comFiltroPorPagina_retornarFiltrado() throws Exception {
         String json = template.getForObject(URL_CATEGORIAS.concat("?size=2&page=2&nome=a"), String.class);
-        assertThat(json, equalTo("{" +
-                "\"content" +
-                "\":" +
+        assertThat(json, equalTo(
+        "{" +
+                "\"content\":" +
                 "[" +
                 "{\"codigo\":6,\"nome\":\"bancos\"}," +
                 "{\"codigo\":8,\"nome\":\"casa\"}" +
                 "]," +
+                "\"totalPages\":9," +
+                "\"totalElements\":17," +
                 "\"last\":false," +
-                "\"totalElements\":14," +
-                "\"totalPages\":7," +
                 "\"size\":2," +
                 "\"number\":2," +
                 "\"sort\":null," +
-                "\"first\":false," +
-                "\"numberOfElements\":2" +
-                "}"));
+                "\"numberOfElements\":2," +
+                "\"first\":false" +
+                "}"
+        ));
+
+
+
     }
 
     @Test
