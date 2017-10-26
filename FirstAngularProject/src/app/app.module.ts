@@ -15,6 +15,10 @@ import {FuncionarioService} from "./funcionario-service";
 import {CidadeService} from "./cidade.service";
 import {HttpModule} from "@angular/http";
 import { CidadesComponent } from './cidades/cidades.component';
+import { AppheaderComponent } from './components/appheader/appheader.component';
+import { AppfooterComponent } from './components/appfooter/appfooter.component';
+import { AppsettingsComponent } from './components/appsettings/appsettings.component';
+import { AppmenuComponent } from './components/appmenu/appmenu.component';
 
 
 @NgModule({
@@ -26,7 +30,11 @@ import { CidadesComponent } from './cidades/cidades.component';
     FuncionarioFormComponent,
     CampoColoridoDirective,
     TemplateDrivenComponent,
-    CidadesComponent
+    CidadesComponent,
+    AppheaderComponent,
+    AppfooterComponent,
+    AppsettingsComponent,
+    AppmenuComponent
   ],
   imports: [
     BrowserModule,
