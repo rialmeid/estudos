@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
+import {Lancamento} from "../core/model";
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class LancamentoService {
@@ -11,9 +13,7 @@ export class LancamentoService {
   }
 
   pesquisar(): Promise<any> {
-
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    const headers = this.headersWithAuthorization();
 
     return this.http.get(this.lancamentosUrl, { headers })
       .toPromise()
@@ -25,4 +25,19 @@ export class LancamentoService {
 
       )
   }
+
+  private headersWithAuthorization() {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    return headers;
+  }
+
+  atualizar(lancamento: Lancamento): Promise<Lancamento> {
+    return null;
+  }
+
+  buscarPorCodigo(codigo: Number): Promise<Lancamento> {
+    return null;
+  }
+
 }

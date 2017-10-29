@@ -41,6 +41,10 @@ public class LancamentoResource {
         return repository.findAll();
     }
 
+    public Page<Lancamento> listar(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return repository.filtrar(lancamentoFilter, pageable);
+    }
+
     @GetMapping("/{codigo}")
     public ResponseEntity<Lancamento> buscarPorCodigo(@PathVariable Long codigo) {
         ResponseEntity<Lancamento> result = ResponseEntity.noContent().build();
