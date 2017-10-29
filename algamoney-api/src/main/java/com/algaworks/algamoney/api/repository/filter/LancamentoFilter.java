@@ -1,5 +1,9 @@
 package com.algaworks.algamoney.api.repository.filter;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+
 public class LancamentoFilter {
 
     private String descricao;
