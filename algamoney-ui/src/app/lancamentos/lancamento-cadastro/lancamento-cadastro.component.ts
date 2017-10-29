@@ -28,6 +28,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log()
   }
 
 }

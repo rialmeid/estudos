@@ -18,8 +18,17 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryQuery {
 
     @Override
     public Page<Categoria> filtrar(CategoriaFilter filter, Pageable pageable) {
-        TypedQuery<Categoria> query = em.createQuery("select c from Categoria c where c.nome like :nome", Categoria.class);
-        query.setParameter("nome", "%".concat(filter.getNome()).concat("%"));
+        StringBuilder sql = new StringBuilder("select c from Categoria c ");
+        String nome = filter.getNome();
+
+        if (nome != null) {
+            sql = sql.append("where c.nome like :nome");
+        }
+
+        TypedQuery<Categoria> query = em.createQuery(sql.toString(), Categoria.class);
+        if (nome != null) {
+            query.setParameter("nome", "%".concat(nome).concat("%"));
+        }
         adicionarRestricoesDePaginacao(query, pageable);
         return new PageImpl(query.getResultList(), pageable, total(filter));
     }
@@ -34,8 +43,20 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryQuery {
     }
 
     private Long total(CategoriaFilter filter) {
-        TypedQuery<Categoria> query = em.createQuery("select c from Categoria c where c.nome like :nome", Categoria.class);
-        query.setParameter("nome", "%".concat(filter.getNome()).concat("%"));
+        StringBuilder sql = new StringBuilder("select c from Categoria c ");
+
+        String nome = filter.getNome();
+
+        if (nome != null) {
+            sql.append("where c.nome like :nome");
+        }
+
+        TypedQuery<Categoria> query = em.createQuery(sql.toString(), Categoria.class);
+
+        if (nome != null) {
+            query.setParameter("nome", "%".concat(nome).concat("%"));
+        }
+
         List<Categoria> categorias = query.getResultList();
         return Long.valueOf(categorias.size());
     }

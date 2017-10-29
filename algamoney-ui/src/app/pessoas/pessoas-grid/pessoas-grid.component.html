@@ -14,8 +14,8 @@
 
 
   <p-column styleClass="col-acoes">
-    <ng-template pTemplate="body">
-      <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+    <ng-template let-pess="rowData" pTemplate="body">
+      <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/pessoas', pess.codigo]"></a>
       <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
     </ng-template>
   </p-column>

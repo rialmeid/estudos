@@ -11,6 +11,7 @@ import {
 import {SelectButtonModule} from "primeng/components/selectbutton/selectbutton";
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import {SharedModule} from "../shared/shared.module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import {SharedModule} from "../shared/shared.module";
     CurrencyMaskModule,
     InputMaskModule,
 
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   declarations: [
     LancamentoCadastroComponent,

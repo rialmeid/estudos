@@ -6,6 +6,7 @@ import {PessoasGridComponent} from "./pessoas-grid/pessoas-grid.component";
 import {FormsModule} from "@angular/forms";
 import {ButtonModule, DataTableModule, InputMaskModule, TooltipModule} from "primeng/primeng";
 import {SharedModule} from "../shared/shared.module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {SharedModule} from "../shared/shared.module";
     TooltipModule,
     ButtonModule,
 
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   declarations: [
     PessoaCadastroComponent,
