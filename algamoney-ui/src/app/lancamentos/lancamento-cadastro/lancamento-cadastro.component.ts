@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {LancamentoService} from "../lancamento.service";
 import {Lancamento} from "../../core/model";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -43,14 +44,33 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   get editando() {
-    return Boolean(this.lancamento.codigo)
+    return Boolean(this.lancamento.codigo);
   }
 
   private carregarLancamento(codigoLancamento: number) {
     this.lancamentoService.buscarPorCodigo(codigoLancamento)
       .then(lancamento => {
         this.lancamento = lancamento;
-      })
+      });
+
+  }
+
+  salvar(form: FormControl) {
+    if (this.editando) {
+      this.atualizarLancamento(form);
+    } else {
+      this.adicionarLancamento(form);
+    }
+  }
+
+  atualizarLancamento(form: FormControl) {
+    this.lancamentoService.atualizar(this.lancamento)
+      .then(lancamento => {
+        this.lancamento = lancamento;
+      });
+  }
+
+  adicionarLancamento(form: FormControl) {
 
   }
 }
