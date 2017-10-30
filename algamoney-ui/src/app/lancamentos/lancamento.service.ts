@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import {Lancamento} from "../core/model";
 import 'rxjs/add/operator/toPromise';
 
+
 @Injectable()
 export class LancamentoService {
 
@@ -13,31 +14,45 @@ export class LancamentoService {
   }
 
   pesquisar(): Promise<any> {
-    const headers = this.headersWithAuthorization();
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.get(this.lancamentosUrl, { headers })
+    return this.http.get(this.lancamentosUrl, {headers})
       .toPromise()
       .then(
         response =>
-          response.json()
-
-        // {console.log(response.json())}
-
+          response.json().content
+        /*{
+         console.log(response.json().content)
+         }*/
       )
-  }
-
-  private headersWithAuthorization() {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-    return headers;
   }
 
   atualizar(lancamento: Lancamento): Promise<Lancamento> {
     return null;
   }
 
-  buscarPorCodigo(codigo: Number): Promise<Lancamento> {
-    return null;
+  buscarPorCodigo(codigo: number): Promise<Lancamento> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.get(this.lancamentosUrl.concat(`/${codigo}`), {headers})
+      .toPromise()
+      .then(response => {
+        const lancamento = response.json() as Lancamento;
+        this.converterStringsParaDatas([lancamento]);
+        return lancamento;
+      });
+  }
+
+  private converterStringsParaDatas(lancamentos: Lancamento[]) {
+    for (const lancamento of lancamentos) {
+      lancamento.dataVencimento = new Date();
+
+      if (lancamento.dataPagamento) {
+        lancamento.dataPagamento = new Date();
+      }
+    }
   }
 
 }

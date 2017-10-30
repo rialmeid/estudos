@@ -11,11 +11,11 @@ export class PessoasGridComponent implements OnInit {
   @Input() pessoas = [];
 
   constructor(
-    private route: ActivatedRoute
+
   ) {}
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.params['codigo']);
+
   }
 
 

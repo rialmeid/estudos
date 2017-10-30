@@ -6,15 +6,17 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: './lancamentos-grid.component.html',
   styleUrls: ['./lancamentos-grid.component.css']
 })
-export class LancamentosGridComponent implements OnInit {
+export class LancamentosGridComponent implements OnInit{
 
   @Input() lancamentos = [];
 
   constructor(private route: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {
-    console.log(this.route);
+
   }
+
 
 }

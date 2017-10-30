@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {LancamentoService} from "../lancamento.service";
+import {Lancamento} from "../../core/model";
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -24,11 +27,30 @@ export class LancamentoCadastroComponent implements OnInit {
     {label: 'Lucas Simão de Almeida', value: 4}
   ];
 
-  constructor() {
+  lancamento = new Lancamento();
+
+  constructor(
+    private lancamentoService: LancamentoService,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    console.log()
+    const codigoLancamento = this.route.snapshot.params['codigo'];
+
+    if (codigoLancamento) {
+      this.carregarLancamento(codigoLancamento);
+    }
   }
 
+  get editando() {
+    return Boolean(this.lancamento.codigo)
+  }
+
+  private carregarLancamento(codigoLancamento: number) {
+    this.lancamentoService.buscarPorCodigo(codigoLancamento)
+      .then(lancamento => {
+        this.lancamento = lancamento;
+      })
+
+  }
 }
