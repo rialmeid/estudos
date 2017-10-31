@@ -25,11 +25,24 @@ export class LancamentoService {
         /*{
          console.log(response.json().content)
          }*/
-      )
+      );
   }
 
   atualizar(lancamento: Lancamento): Promise<Lancamento> {
-    return null;
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}`,
+      JSON.stringify(lancamento), { headers })
+      .toPromise()
+      .then(response => {
+        const lancamentoAlterado = response.json() as Lancamento;
+
+        this.converterStringsParaDatas([lancamentoAlterado]);
+
+        return lancamentoAlterado;
+      });
   }
 
   buscarPorCodigo(codigo: number): Promise<Lancamento> {
