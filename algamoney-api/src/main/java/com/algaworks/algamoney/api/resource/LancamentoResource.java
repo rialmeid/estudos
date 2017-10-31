@@ -3,6 +3,7 @@ package com.algaworks.algamoney.api.resource;
 import com.algaworks.algamoney.api.event.RecursoCriadoEvent;
 import com.algaworks.algamoney.api.exceptionhandler.AlgamoneyExceptionHandler;
 import com.algaworks.algamoney.api.model.Lancamento;
+import com.algaworks.algamoney.api.model.Pessoa;
 import com.algaworks.algamoney.api.repository.LancamentoRepository;
 import com.algaworks.algamoney.api.repository.filter.LancamentoFilter;
 import com.algaworks.algamoney.api.repository.projection.ResumoLancamento;
@@ -72,6 +73,12 @@ public class LancamentoResource {
         Long codigo = save.getCodigo();
         publisher.publishEvent(new RecursoCriadoEvent(this, response, codigo));
         return ResponseEntity.status(HttpStatus.CREATED).body(save);
+    }
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<Lancamento> atualizar(@PathVariable Long codigo, @Valid @RequestBody Lancamento lancamento) {
+        Lancamento lancamentoSalvo = lancamentoService.atualizar(codigo, lancamento);
+        return ResponseEntity.ok(lancamentoSalvo);
     }
 
     @DeleteMapping("/{codigo}")
