@@ -95,4 +95,25 @@ public class CategoriaResourceTest {
         HttpEntity<String> entity = new HttpEntity<>(json, headers);
         return template.postForEntity(URL_CATEGORIAS, entity, String.class);
     }
+
+    @Test
+    public void name() throws Exception {
+
+        CategoriaResourceTest test = new CategoriaResourceTest();
+        test.buscar("Ricardo", "L de Almeida");
+
+        if (Boolean.TRUE) {
+
+        }
+    }
+
+
+    String buscar(String sobrenome, String nome) {
+        String concat = nome.concat(sobrenome).concat("IEE");
+
+
+        return concat;
+    }
+
+
 }
