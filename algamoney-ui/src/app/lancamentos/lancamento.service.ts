@@ -3,14 +3,16 @@ import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {Lancamento} from "../core/model";
 import 'rxjs/add/operator/toPromise';
+import {environment} from "../../environments/environment";
 
 
 @Injectable()
 export class LancamentoService {
 
-  lancamentosUrl = 'http://localhost:8080/lancamentos';
+  lancamentosUrl: string;
 
   constructor(private http: Http) {
+    this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
   }
 
   pesquisar(): Promise<any> {
