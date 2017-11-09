@@ -12,7 +12,7 @@ import {Component, Input, OnInit} from '@angular/core';
   ]
 })
 export class FuncionarioCardComponent {
-  @Input() funcionario = {id: 1};
+  @Input() funcionario = {id: 1, nome: 'RICARDO'};
 
   getEstilosCartao() {
     return {
