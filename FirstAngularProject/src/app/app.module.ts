@@ -19,6 +19,7 @@ import { AppheaderComponent } from './components/appheader/appheader.component';
 import { AppfooterComponent } from './components/appfooter/appfooter.component';
 import { AppsettingsComponent } from './components/appsettings/appsettings.component';
 import { AppmenuComponent } from './components/appmenu/appmenu.component';
+import { TypescriptComponent } from './typescript/typescript.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AppmenuComponent } from './components/appmenu/appmenu.component';
     AppheaderComponent,
     AppfooterComponent,
     AppsettingsComponent,
-    AppmenuComponent
+    AppmenuComponent,
+    TypescriptComponent
   ],
   imports: [
     BrowserModule,
