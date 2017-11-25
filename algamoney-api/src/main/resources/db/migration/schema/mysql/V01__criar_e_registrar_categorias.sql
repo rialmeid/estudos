@@ -1,5 +1,5 @@
 create table categoria (
-codigo BIGINT(20) PRIMARY KEY auto_increment,
+codigo int PRIMARY KEY auto_increment,
 nome VARCHAR(50) not NULL
 ) engine=InnoDB DEFAULT charset=utf8;
 
