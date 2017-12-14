@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -30,27 +31,24 @@ public class CategoriaResource {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public Page<Categoria> listar(CategoriaFilter filter, Pageable pageable) {
-        return categoriaRepository.filtrar(filter, pageable);
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA') and #oauth2.hasScope('read')")
+	public List<Categoria> listar() {
+		return categoriaRepository.findAll();
     }
 
     @PostMapping
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA') and #oauth2.hasScope('write')")
     public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
         Categoria categoriaSalva = categoriaRepository.save(categoria);
-        Long codigo = categoriaSalva.getCodigo();
-        publisher.publishEvent(new RecursoCriadoEvent(this, response, codigo));
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, categoriaSalva.getCodigo()));
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
     }
 
     @GetMapping("/{codigo}")
-    public ResponseEntity<Categoria> buscarPorCodigo(@PathVariable Long codigo) {
-        ResponseEntity<Categoria> responseEntity;
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA') and #oauth2.hasScope('read')")
+	public ResponseEntity<Categoria> buscarPeloCodigo(@PathVariable Long codigo) {
         Categoria categoria = categoriaRepository.findOne(codigo);
-        if (categoria == null) {
-            responseEntity = ResponseEntity.notFound().build();
-        } else {
-            responseEntity = ResponseEntity.ok().body(categoria);
+		 return categoria != null ? ResponseEntity.ok(categoria) : ResponseEntity.notFound().build();
         }
-        return responseEntity;
-    }
+
 }

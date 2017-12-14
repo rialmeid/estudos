@@ -6,8 +6,11 @@ import org.springframework.context.ApplicationEvent;
 import javax.servlet.http.HttpServletResponse;
 
 public class RecursoCriadoEvent extends ApplicationEvent {
-    private final HttpServletResponse response;
-    private final Long codigo;
+
+	private static final long serialVersionUID = 1L;
+
+	private HttpServletResponse response;
+	private Long codigo;
 
     public RecursoCriadoEvent(Object resource, HttpServletResponse response, Long codigo) {
         super(resource);

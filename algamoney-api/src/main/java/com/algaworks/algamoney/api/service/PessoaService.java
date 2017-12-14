@@ -11,26 +11,27 @@ import org.springframework.stereotype.Service;
 public class PessoaService {
 
     @Autowired
-    private PessoaRepository repository;
+	private PessoaRepository pessoaRepository;
 
     public Pessoa atualizar(Long codigo, Pessoa pessoa) {
-        Pessoa pessoaSalva = getPessoaPorCodigo(codigo);
+		Pessoa pessoaSalva = buscarPessoaPeloCodigo(codigo);
+
         BeanUtils.copyProperties(pessoa, pessoaSalva, "codigo");
-        return repository.save(pessoaSalva);
+		return pessoaRepository.save(pessoaSalva);
     }
 
-    public Pessoa getPessoaPorCodigo(Long codigo) {
-        Pessoa pessoaSalva = repository.findOne(codigo);
+	public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
+		Pessoa pessoaSalva = buscarPessoaPeloCodigo(codigo);
+		pessoaSalva.setAtivo(ativo);
+		pessoaRepository.save(pessoaSalva);
+	}
 
+	public Pessoa buscarPessoaPeloCodigo(Long codigo) {
+		Pessoa pessoaSalva = pessoaRepository.findOne(codigo);
         if (pessoaSalva == null) {
             throw new EmptyResultDataAccessException(1);
         }
         return pessoaSalva;
     }
 
-    public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
-        Pessoa pessoa = getPessoaPorCodigo(codigo);
-        pessoa.setAtivo(ativo);
-        repository.save(pessoa);
-    }
 }

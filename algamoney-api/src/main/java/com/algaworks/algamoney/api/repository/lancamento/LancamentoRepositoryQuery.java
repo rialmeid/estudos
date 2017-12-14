@@ -9,6 +9,5 @@ import org.springframework.data.domain.Pageable;
 public interface LancamentoRepositoryQuery {
 
     Page<Lancamento> filtrar(LancamentoFilter lancamentoFilter, Pageable pageable);
-
     Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable);
 }
