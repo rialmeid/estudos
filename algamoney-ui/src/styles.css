@@ -1,12 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 body {
   margin: 0;
-  font-family: Arial, Verdana, Helvetica, sans-serif;
-  color: #440C51;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #404C51;
+}
+
+a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
 }
 
 label {
   font-weight: bold;
+}
+
+.ui-dropdown-filter-container {
+  width: 100%;
 }
 
 @media (min-width: 1200px) {
@@ -30,9 +43,3 @@ label {
   width: 90px;
   text-align: center;
 }
-
-a {
-  text-decoration: none;
-  color: #337ab7
-}
-
