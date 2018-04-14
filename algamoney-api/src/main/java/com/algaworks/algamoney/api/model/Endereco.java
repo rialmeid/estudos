@@ -11,6 +11,15 @@ public class Endereco {
     private String cep;
     private String cidade;
     private String estado;
+    private String complemento;
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 
     public String getLogradouro() {
         return logradouro;

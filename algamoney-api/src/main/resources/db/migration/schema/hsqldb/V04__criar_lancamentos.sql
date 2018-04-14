@@ -1,6 +1,6 @@
 CREATE TABLE lancamento
 (
-  codigo INT PRIMARY KEY,
+  codigo INT IDENTITY PRIMARY KEY,
   descricao VARCHAR(50) NOT NULL,
   dt_vencimento date not null,
   dt_pagto date,

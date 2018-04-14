@@ -1,27 +1,14 @@
-import {BrowserModule} from "@angular/platform-browser";
-import {NgModule} from "@angular/core";
+import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import {AppComponent} from "./app.component";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {LancamentosModule} from "./lancamentos/lancamentos.module";
-import {PessoasModule} from "./pessoas/pessoas.module";
-import {CoreModule} from "./core/core.module";
-import {LancamentoService} from "./lancamentos/lancamento.service";
-import {HttpModule} from "@angular/http";
-import {RouterModule, Routes} from "@angular/router";
-import {LancamentosPesquisaComponent} from "./lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component";
-import {LancamentoCadastroComponent} from "./lancamentos/lancamento-cadastro/lancamento-cadastro.component";
-import {PessoasPesquisaComponent} from "./pessoas/pessoas-pesquisa/pessoas-pesquisa.component";
-import {PessoaCadastroComponent} from './pessoas/pessoa-cadastro/pessoa-cadastro.component';
-
-
-const routes: Routes = [
-  {path: 'lancamentos', component: LancamentosPesquisaComponent},
-  {path: 'lancamentos/novo', component: LancamentoCadastroComponent},
-  {path: 'lancamentos/:codigo', component: LancamentoCadastroComponent},
-  {path: 'pessoas', component: PessoasPesquisaComponent},
-  {path: 'pessoas/novo', component: PessoaCadastroComponent}
-];
+import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { PessoasModule } from './pessoas/pessoas.module';
+import { LancamentosModule } from './lancamentos/lancamentos.module';
+import { SegurancaModule } from './seguranca/seguranca.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -30,14 +17,14 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+
+    CoreModule,
     LancamentosModule,
     PessoasModule,
-    CoreModule,
-    HttpModule,
-    RouterModule.forRoot(routes)
+    SegurancaModule,
+    AppRoutingModule
   ],
-  providers: [LancamentoService],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
