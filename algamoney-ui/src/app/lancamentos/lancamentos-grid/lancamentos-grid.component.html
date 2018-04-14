@@ -1,0 +1,25 @@
+<p-dataTable [value]="lancamentos" [paginator]="true" [rows]="5" [responsive]="true">
+  <p-column field="pessoa.nome" header="Pessoa"></p-column>
+  <p-column field="descricao" header="Descrição"></p-column>
+  <p-column field="dtVencimento" header="Vencimento" styleClass="col-data">
+    <ng-template let-lanc="rowData" pTemplate="body">
+      <span>{{lanc.dtVencimento | date: 'dd/MM/yyyy'}}</span>
+    </ng-template>
+  </p-column>
+  <p-column field="dtPagamento" header="Pagto" styleClass="col-data">
+    <ng-template let-lanc="rowData" pTemplate="body">
+      <span>{{lanc.dtPagamento | date: 'dd/MM/yyyy'}}</span>
+    </ng-template>
+  </p-column>
+  <p-column field="valor" header="Valor" styleClass="col-valor">
+    <ng-template let-lanc="rowData" pTemplate="body">
+      <span [style.color]="lanc.tipo === 'DESPESA' ? 'red' : 'blue'">{{lanc.valor | currency : 'BRL':true:'1.2-2'}}</span>
+    </ng-template>
+  </p-column>
+  <p-column styleClass="col-acoes">
+    <ng-template let-lanc="rowData" pTemplate="body">
+      <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/lancamentos', lanc.codigo]"></a>
+      <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+    </ng-template>
+  </p-column>
+</p-dataTable>
